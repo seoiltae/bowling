@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</head>
+   <body>
+      <h1>bowling Game</h1>      
+      <table border="1" width="50%">
+         <thead>   
+            <tr>
+               <th>이름</th>
+               <th colspan="2">1</th>
+               <th colspan="2">2</th>
+               <th colspan="2">3</th>
+               <th colspan="2">4</th>
+               <th colspan="2">5</th>
+               <th colspan="2">6</th>
+               <th colspan="2">7</th>
+               <th colspan="2">8</th>
+               <th colspan="2">9</th>
+               <th colspan="3">10</th>
+               <th>점수</th>
+            </tr>
+         </thead>
+         <tbody>
+            <tr>
+               <td rowspan="2"><span id="playerName1">&nbsp;</span></td>
+               <td><span id="frame1_1">&nbsp;</span></td>
+               <td><span id="frame1_2">&nbsp;</span></td>
+               <td><span id="frame2_1">&nbsp;</span></td>
+               <td><span id="frame2_2">&nbsp;</span></td>
+               <td><span id="frame3_1">&nbsp;</span></td>
+               <td><span id="frame3_2">&nbsp;</span></td>
+               <td><span id="frame4_1">&nbsp;</span></td>
+               <td><span id="frame4_2">&nbsp;</span></td>
+               <td><span id="frame5_1">&nbsp;</span></td>
+               <td><span id="frame5_2">&nbsp;</span></td>
+               <td><span id="frame6_1">&nbsp;</span></td>
+               <td><span id="frame6_2">&nbsp;</span></td>
+               <td><span id="frame7_1">&nbsp;</span></td>
+               <td><span id="frame7_2">&nbsp;</span></td>
+               <td><span id="frame8_1">&nbsp;</span></td>
+               <td><span id="frame8_2">&nbsp;</span></td>
+               <td><span id="frame9_1">&nbsp;</span></td>
+               <td><span id="frame9_2">&nbsp;</span></td>
+               <td><span id="frame10_1">&nbsp;</span></td>
+               <td><span id="frame10_2">&nbsp;</span></td>
+               <td><span id="frame10_3">&nbsp;</span></td>
+               <td rowspan="2">&nbsp;</td>
+            </tr>
+            <tr>
+            <!--    <td>&nbsp;</td> -->
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="2">&nbsp;</td>
+               <td colspan="3">&nbsp;</td>
+         <!--    <td>&nbsp;</td> -->
+            </tr>
+         </tbody>   
+      </table>
+      <div>
+         <div>
+             선수이름:
+            <input type="text" id="playerInput1">
+         </div>
+         <div>
+            <button type="button" id="addPlayer">선수입력</button>
+         </div>
+      </div>
+      <hr>
+         <div><span id="frameNum"></span></div> 프레임
+      <hr>
+      <div>
+         <div><!-- 1개핀 1번-->
+            1<input type="checkbox" id="pin1" class="pin">
+            2<input type="checkbox" id="pin2" class="pin">
+            3<input type="checkbox" id="pin3" class="pin">
+            4<input type="checkbox" id="pin4" class="pin">
+            5<input type="checkbox" id="pin5" class="pin">
+            6<input type="checkbox" id="pin6" class="pin">
+            7<input type="checkbox" id="pin7" class="pin">
+            8<input type="checkbox" id="pin8" class="pin">
+            9<input type="checkbox" id="pin9" class="pin">
+            10<input type="checkbox" id="pin10" class="pin">
+         </div>
+         <button type="button" id="play">play</button>
+         <button type="button" id="allCheck">전부선택</button>
+         <button type="button" id="allRelease">전부해제</button>
+      </div>
+   </body>
+   <script>
+      //프레임 위치
+      let frameNum = 1;
+      //볼넘버
+      let ballNum =1;
+      //0 = - 난수처리
+      let zero = '-';
+      //스트라이크
+      let St = 'X';
+      //스페어
+      let Sp = '/';
+      //시작버튼 누르면 프레임에 변수프레임 입력
+      $('#frameNum').text(frameNum);      
+      
+      //시작 버튼
+      $('#play').click(function() {
+         console.log("play");
+         
+         // 핀 카운트
+         let pinCnt = 0;
+         //쓰러진 핀
+         let fallPins = [];
+         //각각의 핀의 쓰러짐 유무체크
+         if($('#pin1').is(':checked')) {
+            fallPins.push($('#pin1'))
+            pinCnt +=1;
+         }
+         if($('#pin2').is(':checked')) {
+            fallPins.push($('#pin2'))
+            pinCnt +=1;
+         }
+         if($('#pin3').is(':checked')) {
+            fallPins.push($('#pin3'))
+            pinCnt +=1;
+         }
+         if($('#pin4').is(':checked')) {
+            fallPins.push($('#pin4'))
+            pinCnt +=1;
+         }
+         if($('#pin5').is(':checked')) {
+            fallPins.push($('#pin5'))
+            pinCnt +=1;
+         }
+         if($('#pin6').is(':checked')) {
+            fallPins.push($('#pin6'))
+            pinCnt +=1;
+         }
+         if($('#pin7').is(':checked')) {
+            fallPins.push($('#pin7'))
+            pinCnt +=1;
+         }
+         if($('#pin8').is(':checked')) {
+            fallPins.push($('#pin8'))
+            pinCnt +=1;
+         }
+         if($('#pin9').is(':checked')) {
+            fallPins.push($('#pin9'))
+            pinCnt +=1;
+         }
+         if($('#pin10').is(':checked')) {
+            fallPins.push($('#pin10'))
+            pinCnt +=1;
+         }
+         
+         console.log('pinCnt: ', pinCnt)
+         //넘어진 핀의 수를 보드에 기록
+         //frame1_1
+         if(frameNum==1 && ballNum==1) {
+            $('#frame1_1').text(pinCnt);
+         }
+         //frame1_2
+         if(frameNum==1 && ballNum==2) {
+            $('#frame1_2').text(pinCnt);
+         }
+         //frame2_1
+         if(frameNum==2 && ballNum==1) {
+            $('#frame2_1').text(pinCnt);
+         }
+         //frame2_2
+         if(frameNum==2 && ballNum==2) {
+            $('#frame2_2').text(pinCnt);
+         }
+         //frame3_1
+         if(frameNum==3 && ballNum==1) {
+            $('#frame3_1').text(pinCnt);
+         }
+         //frame3_2
+         if(frameNum==3 && ballNum==2) {
+            $('#frame3_2').text(pinCnt);
+         }
+         //frame4_1
+         if(frameNum==4 && ballNum==1) {
+            $('#frame4_1').text(pinCnt);
+         }
+         //frame4_2
+         if(frameNum==4 && ballNum==2) {
+            $('#frame4_2').text(pinCnt);
+         }
+         //frame5_1
+         if(frameNum==5 && ballNum==1) {
+            $('#frame5_1').text(pinCnt);
+         }
+         //frame5_2
+         if(frameNum==5 && ballNum==2) {
+            $('#frame5_2').text(pinCnt);
+         }
+         //frame6_1
+         if(frameNum==6 && ballNum==1) {
+            $('#frame6_1').text(pinCnt);
+         }
+         //frame6_2
+         if(frameNum==6 && ballNum==2) {
+            $('#frame6_2').text(pinCnt);
+         }
+         //frame7_1
+         if(frameNum==7 && ballNum==1) {
+            $('#frame7_1').text(pinCnt);
+         }
+         //frame7_2
+         if(frameNum==7 && ballNum==2) {
+            $('#frame7_2').text(pinCnt);
+         }
+         //frame8_1
+         if(frameNum==8 && ballNum==1) {
+            $('#frame8_1').text(pinCnt);
+         }
+         //frame8_2
+         if(frameNum==8 && ballNum==2) {
+            $('#frame8_2').text(pinCnt);
+         }
+         //frame9_1
+         if(frameNum==9 && ballNum==1) {
+            $('#frame9_1').text(pinCnt);
+         }
+         //frame9_2
+         if(frameNum==9 && ballNum==2) {
+            $('#frame9_2').text(pinCnt);
+         }
+         //frame10_1
+         if(frameNum==10 && ballNum==1) {
+            $('#frame10_1').text(pinCnt);
+         }
+         //frame10_2
+         if(frameNum==10 && ballNum==2) {
+            $('#frame10_2').text(pinCnt);
+            if(pinCnt == 10 && $('#frame10_1').text() == St) {
+               $('#frame10_2').text(St);
+            }
+            if(pinCnt == 10 && $('#frame10_1').text() != St) {
+               $('#frame10_2').text(Sp);
+            }
+         }
+         //frame10_3
+          if(frameNum==10 && ballNum==3) {
+               $('#frame10_3').text(pinCnt);
+               // 세번쨰에 다 쳤을 경우에 두번째에서 스트라이크 OR 스페어 일때 
+               if(pinCnt == 10 && $('#frame10_2').text() == St || $('#frame10_2').text() == Sp) {
+                   $('#frame10_3').text(St); // 스트라이크
+               } else{  // 세번쨰에 다 쳤을 경우에 두번째에서 스트라이크X OR 스페어X 일때 
+                  $('#frame10_3').text(Sp); //스페어
+               }
+               // 세번쨰에서 스트라이크 OR 스페어가 아닐때 
+               if(pinCnt <10) { 
+                  $('#frame10_3').text(pinCnt);
+               }
+               // 0일경우 난수
+               if(pinCnt == 0) { 
+                  $('#frame10_3').text(zero);
+               }
+           /*   // 첫번쨰와 두번쨰의 값이 10이랑 같지 않을경우
+               if($("#frame10_1").text() ==zero)  {
+            	   if(parseInt($("#frame10_1").text()) = 0){
+            		   if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
+            			   $('#frame10_3').text(''); 
+            		   }
+            	   }
+            		
+               }*/
+           }
+         // 쓰러진 핀 비활성화
+         $(fallPins).each(function(index, item){
+            $(item).attr('disabled', true);
+         });
+         
+         // pin checkd 해제
+         $('.pin').each(function(index, item) {
+            item.checked = false;
+         });
+         
+         if(ballNum ==1) { // 첫번쨰일때
+            //난수 처리
+            if(pinCnt == 0) {
+               if(frameNum==1 && ballNum==1) {
+                  $('#frame1_1').text(zero);
+               } else if(frameNum==2 && ballNum==1) {
+                  $('#frame2_1').text(zero);
+               } else if(frameNum==3 && ballNum==1) {
+                  $('#frame3_1').text(zero);
+               } else if(frameNum==4 && ballNum==1) {
+                  $('#frame4_1').text(zero);
+               } else if(frameNum==5 && ballNum==1) {
+                  $('#frame5_1').text(zero);
+               } else if(frameNum==6 && ballNum==1) {
+                  $('#frame6_1').text(zero);
+               } else if(frameNum==7 && ballNum==1) {
+                  $('#frame7_1').text(zero);
+               } else if(frameNum==8 && ballNum==1) {
+                  $('#frame8_1').text(zero);
+               } else if(frameNum==9 && ballNum==1) {
+                  $('#frame9_1').text(zero);
+               } else if(frameNum==10 && ballNum==1) {
+                  $('#frame10_1').text(zero);
+               } 
+            }
+            //스트라이크
+            if(pinCnt == 10) {
+               if(frameNum==1 && ballNum==1) {
+                  $('#frame1_1').text(St);
+               } else if(frameNum==2 && ballNum==1) {
+                  $('#frame2_1').text(St);
+               } else if(frameNum==3 && ballNum==1) {
+                  $('#frame3_1').text(St);
+               } else if(frameNum==4 && ballNum==1) {
+                  $('#frame4_1').text(St);
+               } else if(frameNum==5 && ballNum==1) {
+                  $('#frame5_1').text(St);
+               } else if(frameNum==6 && ballNum==1) {
+                  $('#frame6_1').text(St);
+               } else if(frameNum==7 && ballNum==1) {
+                  $('#frame7_1').text(St);
+               } else if(frameNum==8 && ballNum==1) {
+                  $('#frame8_1').text(St);
+               } else if(frameNum==9 && ballNum==1) {
+                  $('#frame9_1').text(St);
+               } else if(frameNum==10 && ballNum==1) {
+                  $('#frame10_1').text(St);
+               }
+                // 10프레임이 아닌 경우는 ballNum = 1 frameNum만 1증가
+               if(frameNum<10) {
+                  frameNum +=1;
+               } else {// 10프레임경우 ballNum만 1증가
+                       ballNum += 1;
+               }
+               // pin checkd 해제
+               $('.pin').each(function(index, item) {
+                  $(item).attr('disabled', false);
+               });   
+            } else { //스트라이크 x 두번쨰볼
+               ballNum = 2;
+            } 
+         }else if(ballNum ==2) { //두번쨰일때
+               //난수처리
+               if(pinCnt == 0) {
+                  if(frameNum==1 && ballNum==2) {
+                     $('#frame1_2').text(zero);
+                  } else if(frameNum==2 && ballNum==2) {
+                     $('#frame2_2').text(zero);
+                  } else if(frameNum==3 && ballNum==2) {
+                     $('#frame3_2').text(zero);
+                  } else if(frameNum==4 && ballNum==2) {
+                     $('#frame4_2').text(zero);
+                  } else if(frameNum==5 && ballNum==2) {
+                     $('#frame5_2').text(zero);
+                  } else if(frameNum==6 && ballNum==2) {
+                     $('#frame6_2').text(zero);
+                  } else if(frameNum==7 && ballNum==2) {
+                     $('#frame7_2').text(zero);
+                  } else if(frameNum==8 && ballNum==2) {
+                     $('#frame8_2').text(zero);
+                  } else if(frameNum==9 && ballNum==2) {
+                     $('#frame9_2').text(zero);
+                  } else if(frameNum==10 && ballNum==2) {
+                     $('#frame10_2').text(zero);
+                  }
+               }
+               //2번째에서 전부 쳤을경우
+               if(pinCnt == 10) {
+                  if(frameNum==1 && ballNum==2) {
+                     $('#frame1_2').text(Sp);
+                  } else if(frameNum==2 && ballNum==2) {
+                     $('#frame2_2').text(Sp);
+                  } else if(frameNum==3 && ballNum==2) {
+                     $('#frame3_2').text(Sp);
+                  } else if(frameNum==4 && ballNum==2) {
+                     $('#frame4_2').text(Sp);
+                  } else if(frameNum==5 && ballNum==2) {
+                     $('#frame5_2').text(Sp);
+                  } else if(frameNum==6 && ballNum==2) {
+                     $('#frame6_2').text(Sp);
+                  } else if(frameNum==7 && ballNum==2) {
+                     $('#frame7_2').text(Sp);
+                  } else if(frameNum==8 && ballNum==2) {
+                     $('#frame8_2').text(Sp);
+                  } else if(frameNum==9 && ballNum==2) {
+                     $('#frame9_2').text(Sp);
+                  } 
+               } 
+               //1번째랑 2번쨰 합이 10일 경우 스페어   
+               if(parseInt($("#frame1_1").text()) + parseInt($("#frame1_2").text()) == $('.pin').length) {
+                  $('#frame1_2').text(Sp);
+               } else if(parseInt($("#frame2_1").text()) + parseInt($("#frame2_2").text()) == $('.pin').length) {
+                  $('#frame2_2').text(Sp);
+               } else if(parseInt($("#frame3_1").text()) + parseInt($("#frame3_2").text()) == $('.pin').length) {
+                  $('#frame3_2').text(Sp);
+               } else if(parseInt($("#frame4_1").text()) + parseInt($("#frame4_2").text()) == $('.pin').length) {
+                  $('#frame4_2').text(Sp);
+               } else if(parseInt($("#frame5_1").text()) + parseInt($("#frame5_2").text()) == $('.pin').length) {
+                  $('#frame5_2').text(Sp);
+               } else if(parseInt($("#frame6_1").text()) + parseInt($("#frame6_2").text()) == $('.pin').length) {
+                  $('#frame6_2').text(Sp);
+               } else if(parseInt($("#frame7_1").text()) + parseInt($("#frame7_2").text()) == $('.pin').length) {
+                  $('#frame7_2').text(Sp);
+               } else if(parseInt($("#frame8_1").text()) + parseInt($("#frame8_2").text()) == $('.pin').length) {
+                  $('#frame8_2').text(Sp);
+               } else if(parseInt($("#frame9_1").text()) + parseInt($("#frame9_2").text()) == $('.pin').length) {
+                  $('#frame9_2').text(Sp);
+               } else if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
+                  $('#frame10_2').text(Sp);
+               }
+               
+               
+               //10프레임 세번쨰볼
+               if(frameNum == 10 && ballNum ==2) { // 프레임10이고 볼넘버가 2일때
+                  ballNum = 3;
+                  $('.pin').each(function(index, item){
+                        $(item).attr('disabled', false);
+                  });
+               } else {
+                  ballNum = 1;
+                  if(frameNum < 10) {
+                     frameNum +=1;
+                  }
+               }      
+               $('#frameNum').text(frameNum);
+               // pin checkd 해제
+               $('.pin').each(function(index, item) {
+                  $(item).attr('disabled', false);
+               });
+         } //else if(ballNum ==2) end
+      });   //$('#play').click(function() end
+      
+      //선수 입력
+      $('#addPlayer').click(function() {
+         console.log("addPlayer btn click");
+         if($('#playerInput1').val() =='') {
+            alert('선수 이름을 입력하세요');
+            return
+         } else {
+            $('#playerName1').text($('#playerInput1').val());
+         }
+      });
+      // 핀 전부 체크
+       $('#allCheck').click(function() {
+           $('.pin').each(function(index, item) {
+               if(!$(item).attr('disabled')){ // pin 체크가 활성화 되어있는경우만
+                   item.checked = true;
+               }
+           });
+       });
+       // 핀 전부 해제
+       $('#allRelease').click(function() {
+           $('.pin').each(function(index, item) {
+               item.checked = false;
+           });
+       });    
+   </script>
+</html>
