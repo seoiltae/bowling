@@ -55,16 +55,16 @@
             </tr>
             <tr>
             <!--    <td>&nbsp;</td> -->
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="2">&nbsp;</td>
-               <td colspan="3">&nbsp;</td>
+               <td colspan="2" id="frameScore1">&nbsp;</td>
+               <td colspan="2" id="frameScore2">&nbsp;</td>
+               <td colspan="2" id="frameScore3">&nbsp;</td>
+               <td colspan="2" id="frameScore4">&nbsp;</td>
+               <td colspan="2" id="frameScore5">&nbsp;</td>
+               <td colspan="2" id="frameScore6">&nbsp;</td>
+               <td colspan="2" id="frameScore7">&nbsp;</td>
+               <td colspan="2" id="frameScore8">&nbsp;</td>
+               <td colspan="2" id="frameScore9">&nbsp;</td>
+               <td colspan="3" id="frameScore10">&nbsp;</td>
          <!--    <td>&nbsp;</td> -->
             </tr>
          </tbody>   
@@ -100,6 +100,40 @@
       </div>
    </body>
    <script>
+   	  //프레임의 첫번째 두번째 점수 넣기
+   	  let frameCnt1_1 = 0;
+	  let frameCnt1_2 = 0;
+	  let frameCnt2_1 = 0;
+	  let frameCnt2_2 = 0;
+	  let frameCnt3_1 = 0;
+	  let frameCnt3_2 = 0;
+	  let frameCnt4_1 = 0;
+	  let frameCnt4_2 = 0;
+	  let frameCnt5_1 = 0;
+	  let frameCnt5_2 = 0;
+	  let frameCnt6_1 = 0;
+	  let frameCnt6_2 = 0;
+	  let frameCnt7_1 = 0;
+	  let frameCnt7_2 = 0;
+	  let frameCnt8_1 = 0;
+	  let frameCnt8_2 = 0;
+	  let frameCnt9_1 = 0;
+	  let frameCnt9_2 = 0;
+	  let frameCnt10_1 = 0;
+	  let frameCnt10_2 = 0;
+	  let frameCnt10_3 = 0;
+   	  //프레임별 점수를 나타낼 변수
+   	  let frameScore1 = 0;
+   	  let frameScore2 = 0;
+   	  let frameScore3 = 0;
+   	  let frameScore4 = 0;
+   	  let frameScore5 = 0;
+   	  let frameScore6 = 0;
+   	  let frameScore7 = 0;
+   	  let frameScore8 = 0;
+   	  let frameScore9 = 0;
+   	  let frameScore10 = 0;
+   	  
       //프레임 위치
       let frameNum = 1;
       //볼넘버
@@ -116,19 +150,25 @@
       //시작 버튼
       $('#play').click(function() {
          console.log("play");
-         
-         // 핀 카운트
-         let pinCnt = 0;
-         //쓰러진 핀
-         let fallPins = [];
+      	  // 프레임 토탈 스코어
+      	  let totalScore = 0;
+      	  // 프레임 이전 점수
+      	  let preFramScore = 0;
+          // 핀 카운트
+          let pinCnt = 0;
+          //쓰러진 핀
+          let fallPins = [];
+          
          //각각의 핀의 쓰러짐 유무체크
          if($('#pin1').is(':checked')) {
             fallPins.push($('#pin1'))
             pinCnt +=1;
+      		     
          }
          if($('#pin2').is(':checked')) {
             fallPins.push($('#pin2'))
             pinCnt +=1;
+           
          }
          if($('#pin3').is(':checked')) {
             fallPins.push($('#pin3'))
@@ -167,89 +207,202 @@
          //넘어진 핀의 수를 보드에 기록
          //frame1_1
          if(frameNum==1 && ballNum==1) {
-            $('#frame1_1').text(pinCnt);
+            $('#frame1_1').text(pinCnt)
+            //변수 1_1: 쓰러트린 핀
+            frameCnt1_1 = pinCnt;
+            console.log('프레임1_1의 쓸어트린 핀수: ', frameCnt1_1);
+            
          }
          //frame1_2
          if(frameNum==1 && ballNum==2) {
             $('#frame1_2').text(pinCnt);
+            //변수 1_2: 쓰러트린 핀
+            frameCnt1_2 = pinCnt;
+            console.log('프레임1_2의 쓸어트린 핀수: ', frameCnt1_2);
+            //총점수
+            totalScore = frameCnt1_1+frameCnt1_2;
+            //프레임1의 점수 합계:
+            $('#frameScore1').text(totalScore);
+
          }
          //frame2_1
          if(frameNum==2 && ballNum==1) {
             $('#frame2_1').text(pinCnt);
+            //변수 2_1: 쓰러트린 핀
+            frameCnt2_1 = pinCnt;
+            console.log('프레임2_1의 쓸어트린 핀수: ', frameCnt2_1);
          }
          //frame2_2
          if(frameNum==2 && ballNum==2) {
             $('#frame2_2').text(pinCnt);
+            //변수 2_2: 쓰러트린 핀
+            frameCnt2_2 = pinCnt;
+            console.log('프레임2_2의 쓸어트린 핀수: ', frameCnt2_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2;
+            //프레임2의 점수 합계:
+          	$('#frameScore2').text(totalScore);
          }
          //frame3_1
          if(frameNum==3 && ballNum==1) {
             $('#frame3_1').text(pinCnt);
+            //변수 3_1: 쓰러트린 핀
+            frameCnt3_1 = pinCnt;
+            console.log('프레임3_1의 쓸어트린 핀수: ', frameCnt3_1);
          }
          //frame3_2
          if(frameNum==3 && ballNum==2) {
             $('#frame3_2').text(pinCnt);
+            //변수 3_2: 쓰러트린 핀
+            frameCnt3_2 = pinCnt;
+            console.log('프레임3_2의 쓸어트린 핀수: ', frameCnt3_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2;
+            //프레임3의 점수 합계:
+          	$('#frameScore3').text(totalScore);
+
          }
          //frame4_1
          if(frameNum==4 && ballNum==1) {
             $('#frame4_1').text(pinCnt);
+            //변수 4_1: 쓰러트린 핀
+            frameCnt4_1 = pinCnt;
+            console.log('프레임4_1의 쓸어트린 핀수: ', frameCnt4_1);
          }
          //frame4_2
          if(frameNum==4 && ballNum==2) {
             $('#frame4_2').text(pinCnt);
-         }
+            //변수 4_2: 쓰러트린 핀
+            frameCnt4_2 = pinCnt;
+            console.log('프레임4_2의 쓸어트린 핀수: ', frameCnt4_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2;
+            //프레임4의 점수 합계:
+          	$('#frameScore4').text(totalScore);
+
+		 }
          //frame5_1
          if(frameNum==5 && ballNum==1) {
             $('#frame5_1').text(pinCnt);
+            //변수 5_1: 쓰러트린 핀
+            frameCnt5_1 = pinCnt;
+            console.log('프레임5_1의 쓸어트린 핀수: ', frameCnt5_1);
          }
          //frame5_2
          if(frameNum==5 && ballNum==2) {
             $('#frame5_2').text(pinCnt);
+            //변수 5_2: 쓰러트린 핀
+            frameCnt5_2 = pinCnt;
+            console.log('프레임5_2의 쓸어트린 핀수: ', frameCnt5_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2;
+            //프레임5의 점수 합계:
+          	$('#frameScore5').text(totalScore);
+
          }
          //frame6_1
          if(frameNum==6 && ballNum==1) {
             $('#frame6_1').text(pinCnt);
+            //변수 6_1: 쓰러트린 핀
+            frameCnt6_1 = pinCnt;
+            console.log('프레임6_1의 쓸어트린 핀수: ', frameCnt6_1);
          }
          //frame6_2
          if(frameNum==6 && ballNum==2) {
             $('#frame6_2').text(pinCnt);
+            //변수 6_2: 쓰러트린 핀
+            frameCnt6_2 = pinCnt;
+            console.log('프레임6_2의 쓸어트린 핀수: ', frameCnt6_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2;
+            //프레임6의 점수 합계:
+          	$('#frameScore6').text(totalScore);
+
          }
          //frame7_1
          if(frameNum==7 && ballNum==1) {
             $('#frame7_1').text(pinCnt);
+            //변수 7_1: 쓰러트린 핀
+            frameCnt7_1 = pinCnt;
+            console.log('프레임7_1의 쓸어트린 핀수: ', frameCnt7_1);
          }
          //frame7_2
          if(frameNum==7 && ballNum==2) {
             $('#frame7_2').text(pinCnt);
+            //변수 7_2: 쓰러트린 핀
+            frameCnt7_2 = pinCnt;
+            console.log('프레임7_2의 쓸어트린 핀수: ', frameCnt7_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2+frameCnt7_1+frameCnt7_2;
+            //프레임7의 점수 합계:
+          	$('#frameScore7').text(totalScore);
+
          }
          //frame8_1
          if(frameNum==8 && ballNum==1) {
             $('#frame8_1').text(pinCnt);
+            //변수 8_1: 쓰러트린 핀
+            frameCnt8_1 = pinCnt;
+            console.log('프레임8_1의 쓸어트린 핀수: ', frameCnt8_1);
          }
          //frame8_2
          if(frameNum==8 && ballNum==2) {
             $('#frame8_2').text(pinCnt);
+            //변수 8_2: 쓰러트린 핀
+            frameCnt8_2 = pinCnt;
+            console.log('프레임8_2의 쓸어트린 핀수: ', frameCnt8_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2+frameCnt7_1+frameCnt7_2+frameCnt8_1+frameCnt8_2;
+            //프레임8의 점수 합계:
+          	$('#frameScore8').text(totalScore);
+
          }
          //frame9_1
          if(frameNum==9 && ballNum==1) {
             $('#frame9_1').text(pinCnt);
+            //변수 9_1: 쓰러트린 핀
+            frameCnt9_1 = pinCnt;
+            console.log('프레임9_1의 쓸어트린 핀수: ', frameCnt9_1);
+            
          }
          //frame9_2
          if(frameNum==9 && ballNum==2) {
             $('#frame9_2').text(pinCnt);
+            //변수 9_2: 쓰러트린 핀
+            frameCnt9_2 = pinCnt;
+            console.log('프레임9_2의 쓸어트린 핀수: ', frameCnt9_2);
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2+frameCnt7_1+frameCnt7_2+frameCnt8_1+frameCnt8_2+frameCnt9_1+frameCnt9_2;
+            //프레임9의 점수 합계:
+          	$('#frameScore9').text(totalScore);
+
          }
          //frame10_1
          if(frameNum==10 && ballNum==1) {
             $('#frame10_1').text(pinCnt);
+            //변수 10_1: 쓰러트린 핀
+            frameCnt10_1 = pinCnt;
+            console.log('프레임10_1의 쓸어트린 핀수: ', frameCnt10_1);
          }
          //frame10_2
          if(frameNum==10 && ballNum==2) {
             $('#frame10_2').text(pinCnt);
             if(pinCnt == 10 && $('#frame10_1').text() == St) {
                $('#frame10_2').text(St);
+               console.log("프레임10_2 스트라이크")
             }
             if(pinCnt == 10 && $('#frame10_1').text() != St) {
                $('#frame10_2').text(Sp);
+               console.log("프레임10_2 스페어")
             }
+            //변수 10_2: 쓰러트린 핀
+            frameCnt10_2 = pinCnt;
+          	//총점수
+            totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2+frameCnt7_1+frameCnt7_2+frameCnt8_1+frameCnt8_2+frameCnt9_1+frameCnt9_2+frameCnt10_1+frameCnt10_2;
+            console.log('프레임10_2의 점수: ', frameCnt10_2);
+            //프레임10의 점수 합계:
+          	$('#frameScore10').text(totalScore);
+
          }
          //frame10_3
           if(frameNum==10 && ballNum==3) {
@@ -268,16 +421,21 @@
                if(pinCnt == 0) { 
                   $('#frame10_3').text(zero);
                }
-           /*   // 첫번쨰와 두번쨰의 값이 10이랑 같지 않을경우
-               if($("#frame10_1").text() ==zero)  {
-            	   if(parseInt($("#frame10_1").text()) = 0){
-            		   if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
-            			   $('#frame10_3').text(''); 
-            		   }
-            	   }
-            		
-               }*/
-           }
+						          /* // 첫번쨰와 두번쨰의 값이 10이랑 같지 않을경우
+						             if($("#frame10_1").text() ==zero)  {
+						          	   if(parseInt($("#frame10_1").text()) == 0){
+						          		   if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
+						          			   $('#frame10_3').text(''); 
+						          		   }
+						          	   }
+						          		
+						             } else if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
+						          	   $('#frame10_3').text(''); 
+						             }*/
+               //변수 10_3: 쓰러트린 핀
+               frameCnt10_3 = pinCnt;
+               console.log('프레임10_3의 점수: ', frameCnt10_3);
+           } 
          // 쓰러진 핀 비활성화
          $(fallPins).each(function(index, item){
             $(item).attr('disabled', true);
@@ -289,52 +447,75 @@
          });
          
          if(ballNum ==1) { // 첫번쨰일때
+        	 if(frameNum ==1) {
+        		 $('#frameScore1').text();
+        	 }
             //난수 처리
             if(pinCnt == 0) {
                if(frameNum==1 && ballNum==1) {
                   $('#frame1_1').text(zero);
+                  console.log("프레임1_1 난수")
                } else if(frameNum==2 && ballNum==1) {
                   $('#frame2_1').text(zero);
+                  console.log("프레임2_1 난수")
                } else if(frameNum==3 && ballNum==1) {
                   $('#frame3_1').text(zero);
+                  console.log("프레임3_1 난수")
                } else if(frameNum==4 && ballNum==1) {
                   $('#frame4_1').text(zero);
+                  console.log("프레임4_1 난수")
                } else if(frameNum==5 && ballNum==1) {
                   $('#frame5_1').text(zero);
+                  console.log("프레임5_1 난수")
                } else if(frameNum==6 && ballNum==1) {
                   $('#frame6_1').text(zero);
+                  console.log("프레임6_1 난수")
                } else if(frameNum==7 && ballNum==1) {
                   $('#frame7_1').text(zero);
+                  console.log("프레임7_1 난수")
                } else if(frameNum==8 && ballNum==1) {
                   $('#frame8_1').text(zero);
+                  console.log("프레임8_1 난수")
                } else if(frameNum==9 && ballNum==1) {
                   $('#frame9_1').text(zero);
+                  console.log("프레임9_1 난수")
                } else if(frameNum==10 && ballNum==1) {
                   $('#frame10_1').text(zero);
+                  console.log("프레임10_1 난수")
                } 
             }
             //스트라이크
             if(pinCnt == 10) {
                if(frameNum==1 && ballNum==1) {
                   $('#frame1_1').text(St);
+                  console.log("프레임1_1 스트라이크")
                } else if(frameNum==2 && ballNum==1) {
                   $('#frame2_1').text(St);
+                  console.log("프레임2_1 스트라이크")
                } else if(frameNum==3 && ballNum==1) {
                   $('#frame3_1').text(St);
+                  console.log("프레임3_1 스트라이크")
                } else if(frameNum==4 && ballNum==1) {
                   $('#frame4_1').text(St);
+                  console.log("프레임4_1 스트라이크")
                } else if(frameNum==5 && ballNum==1) {
                   $('#frame5_1').text(St);
+                  console.log("프레임5_1 스트라이크")
                } else if(frameNum==6 && ballNum==1) {
                   $('#frame6_1').text(St);
+                  console.log("프레임6_1 스트라이크")
                } else if(frameNum==7 && ballNum==1) {
                   $('#frame7_1').text(St);
+                  console.log("프레임7_1 스트라이크")
                } else if(frameNum==8 && ballNum==1) {
                   $('#frame8_1').text(St);
+                  console.log("프레임8_1 스트라이크")
                } else if(frameNum==9 && ballNum==1) {
                   $('#frame9_1').text(St);
+                  console.log("프레임9_1 스트라이크")
                } else if(frameNum==10 && ballNum==1) {
                   $('#frame10_1').text(St);
+                  console.log("프레임10_1 스트라이크")
                }
                 // 10프레임이 아닌 경우는 ballNum = 1 frameNum만 1증가
                if(frameNum<10) {
@@ -346,6 +527,7 @@
                $('.pin').each(function(index, item) {
                   $(item).attr('disabled', false);
                });   
+               if(frameNum == 1) {$('#frameScore1').text(frameScore1);}
             } else { //스트라이크 x 두번쨰볼
                ballNum = 2;
             } 
@@ -354,69 +536,99 @@
                if(pinCnt == 0) {
                   if(frameNum==1 && ballNum==2) {
                      $('#frame1_2').text(zero);
+                     console.log("프레임1_2 난수")
                   } else if(frameNum==2 && ballNum==2) {
                      $('#frame2_2').text(zero);
+                     console.log("프레임2_2 난수")
                   } else if(frameNum==3 && ballNum==2) {
                      $('#frame3_2').text(zero);
+                     console.log("프레임3_2 난수")
                   } else if(frameNum==4 && ballNum==2) {
                      $('#frame4_2').text(zero);
+                     console.log("프레임4_2 난수")
                   } else if(frameNum==5 && ballNum==2) {
                      $('#frame5_2').text(zero);
+                     console.log("프레임5_2 난수")
                   } else if(frameNum==6 && ballNum==2) {
                      $('#frame6_2').text(zero);
+                     console.log("프레임6_2 난수")
                   } else if(frameNum==7 && ballNum==2) {
                      $('#frame7_2').text(zero);
+                     console.log("프레임7_2 난수")
                   } else if(frameNum==8 && ballNum==2) {
                      $('#frame8_2').text(zero);
+                     console.log("프레임8_2 난수")
                   } else if(frameNum==9 && ballNum==2) {
                      $('#frame9_2').text(zero);
+                     console.log("프레임9_2 난수")
                   } else if(frameNum==10 && ballNum==2) {
                      $('#frame10_2').text(zero);
+                     console.log("프레임10_2 난수")
                   }
                }
                //2번째에서 전부 쳤을경우
                if(pinCnt == 10) {
                   if(frameNum==1 && ballNum==2) {
                      $('#frame1_2').text(Sp);
+                     console.log("프레임1_2 스페어")
                   } else if(frameNum==2 && ballNum==2) {
                      $('#frame2_2').text(Sp);
+                     console.log("프레임2_2 스페어")
                   } else if(frameNum==3 && ballNum==2) {
                      $('#frame3_2').text(Sp);
+                     console.log("프레임3_2 스페어")
                   } else if(frameNum==4 && ballNum==2) {
                      $('#frame4_2').text(Sp);
+                     console.log("프레임4_2 스페어")
                   } else if(frameNum==5 && ballNum==2) {
                      $('#frame5_2').text(Sp);
+                     console.log("프레임5_2 스페어")
                   } else if(frameNum==6 && ballNum==2) {
                      $('#frame6_2').text(Sp);
+                     console.log("프레임6_2 스페어")
                   } else if(frameNum==7 && ballNum==2) {
                      $('#frame7_2').text(Sp);
+                     console.log("프레임7_2 스페어")
                   } else if(frameNum==8 && ballNum==2) {
                      $('#frame8_2').text(Sp);
+                     console.log("프레임8_2 스페어")
                   } else if(frameNum==9 && ballNum==2) {
                      $('#frame9_2').text(Sp);
+                     console.log("프레임9_2 스페어")
                   } 
                } 
                //1번째랑 2번쨰 합이 10일 경우 스페어   
                if(parseInt($("#frame1_1").text()) + parseInt($("#frame1_2").text()) == $('.pin').length) {
                   $('#frame1_2').text(Sp);
+                  console.log("프레임1번쨰 스페어")
                } else if(parseInt($("#frame2_1").text()) + parseInt($("#frame2_2").text()) == $('.pin').length) {
                   $('#frame2_2').text(Sp);
+                  
+                  console.log("프레임2번쨰 스페어")
                } else if(parseInt($("#frame3_1").text()) + parseInt($("#frame3_2").text()) == $('.pin').length) {
                   $('#frame3_2').text(Sp);
+                  console.log("프레임3번쨰 스페어")
                } else if(parseInt($("#frame4_1").text()) + parseInt($("#frame4_2").text()) == $('.pin').length) {
                   $('#frame4_2').text(Sp);
+                  console.log("프레임4번쨰 스페어")
                } else if(parseInt($("#frame5_1").text()) + parseInt($("#frame5_2").text()) == $('.pin').length) {
                   $('#frame5_2').text(Sp);
+                  console.log("프레임5번쨰 스페어")
                } else if(parseInt($("#frame6_1").text()) + parseInt($("#frame6_2").text()) == $('.pin').length) {
                   $('#frame6_2').text(Sp);
+                  console.log("프레임6번쨰 스페어")
                } else if(parseInt($("#frame7_1").text()) + parseInt($("#frame7_2").text()) == $('.pin').length) {
                   $('#frame7_2').text(Sp);
+                  console.log("프레임7번쨰 스페어")
                } else if(parseInt($("#frame8_1").text()) + parseInt($("#frame8_2").text()) == $('.pin').length) {
                   $('#frame8_2').text(Sp);
+                  console.log("프레임8번쨰 스페어")
                } else if(parseInt($("#frame9_1").text()) + parseInt($("#frame9_2").text()) == $('.pin').length) {
                   $('#frame9_2').text(Sp);
+                  console.log("프레임9번쨰 스페어")
                } else if(parseInt($("#frame10_1").text()) + parseInt($("#frame10_2").text()) == $('.pin').length) {
                   $('#frame10_2').text(Sp);
+                  console.log("프레임10번쨰 스페어")
                }
                
                
