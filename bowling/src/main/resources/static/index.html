@@ -51,7 +51,7 @@
                <td><span id="frame10_1">&nbsp;</span></td>
                <td><span id="frame10_2">&nbsp;</span></td>
                <td><span id="frame10_3">&nbsp;</span></td>
-               <td rowspan="2">&nbsp;</td>
+               <td rowspan="2" id="totalCnt">&nbsp;</td>
             </tr>
             <tr>
             <!--    <td>&nbsp;</td> -->
@@ -387,8 +387,14 @@
          }
          //frame10_2
          if(frameNum==10 && ballNum==2) {
+        	 //변수 10_2: 쓰러트린 핀
+             frameCnt10_2 = pinCnt;
             $('#frame10_2').text(pinCnt);
             if(pinCnt == 10 && $('#frame10_1').text() == St) {
+            	//연속 스트라이크
+                if(frameCnt9_1 ==10 && frameCnt10_1==10 && frameCnt10_2 ==10) {
+               	  $('#frameScore9').text(parseInt($("#frameScore8").text())+frameCnt9_1+frameCnt10_1+frameCnt10_2);  
+                 }  
                $('#frame10_2').text(St);
                console.log("프레임10_2 스트라이크")
             }
@@ -396,8 +402,6 @@
                $('#frame10_2').text(Sp);
                console.log("프레임10_2 스페어")
             }
-            //변수 10_2: 쓰러트린 핀
-            frameCnt10_2 = pinCnt;
          /* 	//총점수
             totalScore = frameCnt1_1+frameCnt1_2+frameCnt2_1+frameCnt2_2+frameCnt3_1+frameCnt3_2+frameCnt4_1+frameCnt4_2+frameCnt5_1+frameCnt5_2+frameCnt6_1+frameCnt6_2+frameCnt7_1+frameCnt7_2+frameCnt8_1+frameCnt8_2+frameCnt9_1+frameCnt9_2+frameCnt10_1+frameCnt10_2;
             console.log('프레임10_2의 점수: ', frameCnt10_2);
@@ -407,10 +411,16 @@
          }
          //frame10_3
           if(frameNum==10 && ballNum==3) {
+        	   // 10_3 핀값
+        	   frameCnt10_3 = pinCnt;	
                $('#frame10_3').text(pinCnt);
                // 세번쨰에 다 쳤을 경우에 두번째에서 스트라이크 OR 스페어 일때 
                if(pinCnt == 10 && $('#frame10_2').text() == St || $('#frame10_2').text() == Sp) {
-                   $('#frame10_3').text(St); // 스트라이크
+            	 //연속 스트라이크
+                 if(frameCnt10_1 ==10 && frameCnt10_2==10 && frameCnt10_3 ==10) {
+                  	$('#frameScore10').text(parseInt($("#frameScore9").text())+frameCnt10_1+frameCnt10_2+frameCnt10_3);  
+                    }  
+            	   $('#frame10_3').text(St); // 스트라이크
                } else{  // 세번쨰에 다 쳤을 경우에 두번째에서 스트라이크X OR 스페어X 일때 
                   $('#frame10_3').text(Sp); //스페어
                }
@@ -544,8 +554,8 @@
                   console.log("프레임9_1 스트라이크")
                } else if(frameNum==10 && ballNum==1) {
                   $('#frame10_1').text(St);
-                  //연속 스트라이크
-                  if(frameCnt8_1 ==10 && frameCnt9_1==10 && frameCnt10_1 == 10) {
+                   //연속 스트라이크
+            	   if(frameCnt8_1 ==10 && frameCnt9_1==10 && frameCnt10_1 == 10) {
                  	  $('#frameScore8').text(parseInt($("#frameScore7").text())+frameCnt8_1+frameCnt9_1+frameCnt10_1);  
                    } 
                   console.log("프레임10_1 스트라이크")
@@ -629,10 +639,7 @@
                   } else if(frameNum==9 && ballNum==2) {
                      $('#frame9_2').text(Sp);
                      console.log("프레임9_2 스페어")
-                  } else if(frameNum==10 && ballNum==2) {
-                      $('#frame10_2').text(St);
-                      console.log("프레임9_2 스페어")
-                   } 
+                  }
                } 
                //1번째랑 2번쨰 합이 10일 경우 스페어   
                if(parseInt($("#frame1_1").text()) + parseInt($("#frame1_2").text()) == $('.pin').length) {
